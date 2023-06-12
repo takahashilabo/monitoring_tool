@@ -167,8 +167,9 @@ Process.fork do
   end
   
   def upload(d)
-    #uri = URI.parse('http://localhost:3030/upload') # Replace with your web server's URL
-    uri = URI.parse('https://dmss-r653.onrender.com/upload') # Replace with your web server's URL
+    u = (Rails.env.development?) ? 'http://localhost:3030/upload' : 'https://dmss-r653.onrender.com/upload'
+    uri = URI.parse(u)
+
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true if uri.instance_of? URI::HTTPS
     request = Net::HTTP::Post.new(uri.path, {'Content-Type' => 'application/octet-stream'})
