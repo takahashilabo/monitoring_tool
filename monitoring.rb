@@ -76,10 +76,10 @@ Process.fork do
   #エラーが発生したファイル名を取得する
   def get_filename(arr)
     arr.each do |e|
-      if e.include?(".rb")
+      if e.include?(".rb:")
         return e.split(".rb")[0].split("/")[-1] + ".rb"
       end
-      if e.include?(".erb")
+      if e.include?(".erb:")
         return e.split(".erb")[0].split("/")[-1] + ".erb"
       end
     end
@@ -88,10 +88,10 @@ Process.fork do
   #エラーが発生したファイル名（パスつき）を取得する
   def get_filename_with_path(arr)
     arr.each do |e|
-      if e.include?(".rb")
+      if e.include?(".rb:")
         return e.split(".rb")[0] + ".rb"
       end
-      if e.include?(".erb")
+      if e.include?(".erb:")
         return e.split(".erb")[0] + ".erb"
       end
     end
@@ -100,10 +100,10 @@ Process.fork do
   #エラーが発生したファイル行（位置）を取得する
   def get_lineno(arr)
     arr.each do |e|
-      if e.include?(".rb")
+      if e.include?(".rb:")
         return e.split(".rb")[1].split(":")[1]
       end
-      if e.include?(".erb")
+      if e.include?(".erb:")
         return e.split(".erb")[1].split(":")[1]
       end
     end
