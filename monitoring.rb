@@ -15,7 +15,7 @@ DEVMODE = true
 #学籍番号取得
 uid = ""
 if SID.size == 0
-  puts "\e[31mconfig/initializers/monitoring.rbの２行目のSIDに学籍番号(10桁)をセットしてください\e[m"
+  puts "\e[31mconfig/initializers/monitoring.rb の２行目のSIDに学籍番号(10桁)をセットしてください\e[m"
   exit
 else 
   uid = SID
