@@ -7,6 +7,9 @@ require 'net/http'
 #require 'base64'
 #require 'json'
 
+#本ツール開発中かどうか？
+DEVMODE = false
+
 #学籍番号取得
 uid = ""
 if SID.size == 0
@@ -166,7 +169,7 @@ Process.fork do
   end
   
   def upload(d)
-    u = (Rails.env.development?) ? 'http://localhost:3030/upload' : 'https://dmss-r653.onrender.com/upload'
+    u = (DEVMODE) ? 'http://localhost:3030/upload' : 'https://dmss-r653.onrender.com/upload'
     uri = URI.parse(u)
 
     http = Net::HTTP.new(uri.host, uri.port)
