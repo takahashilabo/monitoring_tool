@@ -203,13 +203,7 @@ Process.fork do
       next
     end
 
-    if s.start_with?( 'Started' ) 
-      h = Hash.new
-      h[:uid] = uid
-      h[:ipaddr] = ipaddr
-      h[:error_date] = Time.now.strftime("%Y-%m-%d %H:%M:%S")
-      upload(h)
-    elsif s.include?( 'Error' )
+    if s.include?( 'Error' ) #s.start_with?( 'Started' )
       h = Hash.new
       logfile(s).each do |e|
         h[:uid] = uid
