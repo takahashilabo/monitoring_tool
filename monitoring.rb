@@ -1,6 +1,8 @@
 #学籍番号をセットしてください（例 "2111140000"）
 SID = ""
 
+return if not defined?(Rails::Server) #rails s実行時以外は以下を実行させない
+
 require 'date'
 require 'fileutils'
 require 'net/http'
@@ -8,7 +10,7 @@ require 'net/http'
 #require 'json'
 
 #本ツール開発中かどうか？
-DEVMODE = false
+DEVMODE = true
 
 #学籍番号取得
 uid = ""
