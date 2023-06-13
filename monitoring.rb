@@ -10,7 +10,7 @@ require 'net/http'
 #require 'json'
 
 #本ツール開発中かどうか？
-DEVMODE = true
+DEVMODE = false
 
 #学籍番号取得
 uid = ""
