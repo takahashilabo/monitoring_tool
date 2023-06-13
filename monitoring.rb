@@ -1,5 +1,5 @@
 #学籍番号をセットしてください（例 "2111140000"）
-SID = ""
+SID = "2111140000"
 
 require 'date'
 require 'fileutils'
@@ -65,7 +65,6 @@ Process.fork do
   
   #日付を標準化する
   def fdate(d)
-    p d
     DateTime.parse(d).strftime("%Y-%m-%d %H:%M:%S")
   end
   
@@ -179,9 +178,9 @@ Process.fork do
     response = http.request(request)
   
     if response.code.to_i == 200
-      puts "Upload successful!"
+      puts "OK"
     else
-      puts "Upload failed with response code: #{response.code}"
+      puts "NG: #{response.code}"
     end
   end
   
@@ -203,8 +202,14 @@ Process.fork do
       sleep 1
       next
     end
-  
-    if s.start_with?( 'Started' ) or s.include?( 'Error' )
+
+    if s.start_with?( 'Started' ) 
+      h = Hash.new
+      h[:uid] = uid
+      h[:ipaddr] = ipaddr
+      h[:error_date] = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      upload(h)
+    elsif s.include?( 'Error' )
       h = Hash.new
       logfile(s).each do |e|
         h[:uid] = uid
