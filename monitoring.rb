@@ -1,5 +1,5 @@
 #学籍番号をセットしてください（例 "2111140000"）
-SID = "2111140000"
+SID = ""
 
 require 'date'
 require 'fileutils'
