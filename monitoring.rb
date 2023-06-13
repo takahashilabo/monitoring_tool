@@ -89,10 +89,12 @@ Process.fork do
   def get_filename_with_path(arr)
     arr.each do |e|
       if e.include?(".rb:")
-        return e.split(".rb")[0] + ".rb"
+        a = e.split(".rb")[0]
+        return a.include?("(") ? a.split("(")[1] + ".rb" : a + ".rb"
       end
       if e.include?(".erb:")
-        return e.split(".erb")[0] + ".erb"
+        a = e.split(".erb")[0]
+        return a.include?("(") ? a.split("(")[1] + ".erb" : a + ".erb"
       end
     end
   end
