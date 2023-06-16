@@ -1,5 +1,11 @@
-#学籍番号をセットしてください（例 "2111140000"）
-SID = ""
+#学籍番号取得
+SID = ENV['MY_STUDENT_ID']
+if !SID
+  puts "\e[31mhttps://github.com/takahashilabo/monitoring_tool/blob/main/README.md の手順を実行してください。\e[m"
+  exit
+else 
+  uid = SID
+end
 
 return if not defined?(Rails::Server) #rails s実行時以外は以下を実行させない
 
@@ -11,15 +17,6 @@ require 'net/http'
 
 #本ツール開発中かどうか？
 DEVMODE = false
-
-#学籍番号取得
-uid = ""
-if SID.size == 0
-  puts "\e[31mconfig/initializers/monitoring.rb の２行目のSIDに学籍番号(10桁)をセットしてください\e[m"
-  exit
-else 
-  uid = SID
-end
 
 Process.fork do
   # 演習で編集するファイル一覧（アップロード対象になる）
