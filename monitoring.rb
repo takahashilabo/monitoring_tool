@@ -183,7 +183,7 @@ Process.fork do
   
     if response.code.to_i == 200
       puts "最新エラーの助言を見るには以下にアクセスしてください："
-      puts "https://dmss-r653.onrender.com/a/#{SID}"
+      puts (DEVMODE) ? "http://localhost:3030/a/#{SID}" : "https://dmss-r653.onrender.com/a/#{SID}"
     else
       puts "NG: #{response.code}"
     end
