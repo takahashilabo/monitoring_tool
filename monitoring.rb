@@ -15,9 +15,6 @@ require 'net/http'
 #require 'base64'
 #require 'json'
 
-#本ツール開発中かどうか？
-DEVMODE = false
-
 Process.fork do
   # 演習で編集するファイル一覧（アップロード対象になる）
   EDIT_FILES =<<~EOS
@@ -170,7 +167,7 @@ Process.fork do
   end
   
   def upload(d)
-    u = (DEVMODE) ? 'http://localhost:3030/upload' : 'https://dmss-r653.onrender.com/upload'
+    u = (!ENV['DEVMODE']) ? 'https://dmss-r653.onrender.com/upload' : 'http://localhost:3030/upload'
     uri = URI.parse(u)
 
     http = Net::HTTP.new(uri.host, uri.port)
@@ -183,7 +180,7 @@ Process.fork do
   
     if response.code.to_i == 200
       puts "最新エラーの助言を見るには以下にアクセスしてください："
-      puts (DEVMODE) ? "http://localhost:3030/a/#{SID}" : "https://dmss-r653.onrender.com/a/#{SID}"
+      puts (!ENV['DEVMODE']) ? "https://dmss-r653.onrender.com/a/#{SID}" : "http://localhost:3030/a/#{SID}"
     else
       puts "NG: #{response.code}"
     end
