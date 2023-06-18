@@ -214,7 +214,7 @@ Process.fork do
       end
       upload(h)
       puts "最新エラーの助言を見るには以下にアクセスしてください："
-      puts (!ENV['DEVMODE']) ? "https://dmss-r653.onrender.com/" : "http://localhost:3030/"
+      puts (!ENV['DEVMODE']) ? "https://dmss-r653.onrender.com/?uid=#{uid}" : "http://localhost:3030/?uid=#{uid}"
       next
     end
 
