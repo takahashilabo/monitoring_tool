@@ -62,11 +62,6 @@ Process.fork do
     exit(1)
   end
   
-  #日付を標準化する
-  def fdate(d)
-    DateTime.parse(d).strftime("%Y-%m-%d %H:%M:%S")
-  end
-  
   #エラーが発生したファイル名を取得する
   def get_filename(arr)
     arr.each do |e|
@@ -179,8 +174,7 @@ Process.fork do
     response = http.request(request)
   
     if response.code.to_i == 200
-      puts "最新エラーの助言を見るには以下にアクセスしてください："
-      puts (!ENV['DEVMODE']) ? "https://dmss-r653.onrender.com/a/#{SID}" : "http://localhost:3030/a/#{SID}"
+      puts "OK"
     else
       puts "NG: #{response.code}"
     end
@@ -205,7 +199,8 @@ Process.fork do
       next
     end
 
-    if s.include?( 'Error' ) #s.start_with?( 'Started' )
+    #エラーを優先処理し、Startedはエラーがない場合の処理にする
+    if s.include?( 'Error' )
       h = Hash.new
       logfile(s).each do |e|
         h[:uid] = uid
@@ -218,6 +213,22 @@ Process.fork do
         h[:error_files] = file2hash
       end
       upload(h)
+      puts "最新エラーの助言を見るには以下にアクセスしてください："
+      puts (!ENV['DEVMODE']) ? "https://dmss-r653.onrender.com/" : "http://localhost:3030/"
+      next
+    end
+
+    if s.start_with?( 'Started' )
+      h = Hash.new
+      h[:uid] = uid
+      h[:ipaddr] = ipaddr
+      h[:error_date] = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+      h[:error_msg_key] = "200" #no error
+      h[:error_msg_detail] = nil
+      h[:error_filename] = nil
+      h[:error_code_part] = nil
+      h[:error_files] = nil
+    upload(h)
     end
   end
 end
