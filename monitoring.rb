@@ -35,7 +35,13 @@ Process.fork do
   app/views/my_objects/index.html.erb
   app/views/my_objects/edit.html.erb
   app/views/my_objects/new.html.erb
-  app/models/err.rb
+  app/controllers/students_controller.rb
+  app/views/students/index.html.erb
+  app/views/students/edit.html.erb
+  app/views/students/new.html.erb
+  app/models/student.rb
+  test/controllers/students_controller_test.rb
+  test/models/student_test.rb
   EOS
   
   #IPアドレス取得（本人性の確認のため）
