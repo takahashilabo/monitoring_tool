@@ -111,7 +111,7 @@ Process.fork do
     if get_lineno(arr) =~ /^\d+$/ #数字か？
       lineno = get_lineno(arr)
       fname = get_filename_with_path(arr)
-      return "" if not File.exists?(fname)
+      return "" if not File.exist?(fname)
       open fname, "r" do |file|
         s = file.read.split("\n")
         l = [lineno.to_i - LINENUM - 1, 0].max
