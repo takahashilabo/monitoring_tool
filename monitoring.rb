@@ -168,7 +168,7 @@ Process.fork do
   end
   
   def upload(d)
-    u = (!ENV['DEVMODE']) ? 'https://dmss-r653.onrender.com/upload' : 'http://localhost:3030/upload'
+    u = (!ENV['DEVMODE']) ? 'https://dmss-1jsy.onrender.com/upload' : 'http://localhost:3030/upload'
     uri = URI.parse(u)
 
     http = Net::HTTP.new(uri.host, uri.port)
