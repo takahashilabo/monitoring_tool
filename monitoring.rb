@@ -104,6 +104,7 @@ Process.fork do
         return e.split(".erb")[1].split(":")[1]
       end
     end
+    "" #見つからなかった場合(2024/6/7 added)
   end
   
   #エラーメッセージにエラー行があれば、エラーファイルのエラー行周辺のコード片（String）を取得する、なければ空文字列を返す
@@ -220,7 +221,7 @@ Process.fork do
       end
       upload(h)
       puts "最新エラーの助言を見るには以下にアクセスしてください："
-      puts (!ENV['DEVMODE']) ? "https://dmss-r653.onrender.com/?uid=#{uid}" : "http://localhost:3030/?uid=#{uid}"
+      puts (!ENV['DEVMODE']) ? "https://dmss-1jsy.onrender.com/?uid=#{uid}" : "http://localhost:3030/?uid=#{uid}"
       next
     end
 
